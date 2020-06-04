@@ -28,52 +28,20 @@ export const Content = styled.div`
     h1 {
       margin-bottom: 24px;
     }
-    input {
-      background: #232129;
-      border: 2px solid #232129;
-      border-radius: 10px;
+  }
 
-      width: 100%;
-      padding: 16px;
-      color: #f4ede8;
-      & + input {
-        margin-top: 8px;
-      }
+  a {
+    text-decoration: none;
+    color: #f4ede8;
+    display: block;
+    margin-top: 24px;
+    transition: color 0.2s;
 
-      &::placeholder {
-        color: #666360;
-      }
-    }
-    button {
-      background: #ff9000;
-      color: #312e38;
-      border: 0;
-      border-radius: 10px;
-
-      width: 100%;
-      height: 56px;
-      padding: 0 16px;
-      font-weight: 500;
-      margin-top: 16px;
-
-      transition: background-color 0.2s;
-      &:hover {
-        background: ${shade(0.2, '#ff9000')};
-      }
-    }
-
-    a {
-      text-decoration: none;
-      color: #f4ede8;
-      display: block;
-      margin-top: 24px;
-      transition: color 0.2s;
-
-      &:hover {
-        color: ${shade(0.2, '#f4ede8')};
-      }
+    &:hover {
+      color: ${shade(0.2, '#f4ede8')};
     }
   }
+
   > a {
     text-decoration: none;
     color: #ff9000;
