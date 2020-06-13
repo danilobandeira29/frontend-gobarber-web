@@ -1,48 +1,38 @@
 import React from 'react';
 import { FiAlertCircle, FiXCircle } from 'react-icons/fi';
 
+import { ToastMessage, useToast } from '../../hooks/toast';
+
 import { Container, Toast } from './styles';
 
-const ToastsContainer: React.FC = () => {
+interface ToastContainerProps {
+  messages: ToastMessage[];
+}
+
+const ToastsContainer: React.FC<ToastContainerProps> = ({ messages }) => {
+  const { removeToast } = useToast();
   return (
     <Container>
-      <Toast hasDescription>
-        <FiAlertCircle size={20} />
+      {messages.map(message => {
+        return (
+          <Toast
+            hasDescription={!!message.description}
+            key={message.id}
+            type={message.type}
+          >
+            <FiAlertCircle size={20} />
 
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Não foi possível fazer login na aplicação</p>
-        </div>
+            <div>
+              <strong>{message.title}</strong>
+              {message.description && <p>{message.description}</p>}
+            </div>
 
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Toast>
-
-      <Toast type="success" hasDescription={false}>
-        <FiAlertCircle size={20} />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Toast>
-
-      <Toast type="error" hasDescription>
-        <FiAlertCircle size={20} />
-
-        <div>
-          <strong>Aconteceu um erro</strong>
-          <p>Não foi possível fazer login na aplicação</p>
-        </div>
-
-        <button type="button">
-          <FiXCircle size={18} />
-        </button>
-      </Toast>
+            <button type="button" onClick={() => removeToast(message.id)}>
+              <FiXCircle size={18} />
+            </button>
+          </Toast>
+        );
+      })}
     </Container>
   );
 };
