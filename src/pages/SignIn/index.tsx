@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-
+import { Link } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -50,14 +50,14 @@ const SignIn: React.FC = () => {
           const errors = getValidationErrors(err);
 
           formRef.current?.setErrors(errors);
+        } else {
+          addToast({
+            type: 'error',
+            title: 'Erro na autenticação',
+            description:
+              'Suas credencias de login não coincidem com uma conta em nosso sistema',
+          });
         }
-
-        addToast({
-          type: 'error',
-          title: 'Erro na autenticação',
-          description:
-            'Suas credencias de login não coincidem com uma conta em nosso sistema',
-        });
       }
     },
     [signIn, addToast],
@@ -81,10 +81,10 @@ const SignIn: React.FC = () => {
           <a href="forgot">Esqueci minha senha</a>
         </Form>
 
-        <a href="create">
+        <Link to="/signup">
           <FiLogIn />
           Criar conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>
