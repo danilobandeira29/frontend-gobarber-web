@@ -1,9 +1,10 @@
 import React, { useCallback, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
+import api from '../../services/api';
 
 import logo from '../../assets/logo.svg';
 import Input from '../../components/Input';
@@ -26,6 +27,8 @@ const SignIn: React.FC = () => {
 
   const history = useHistory();
 
+  const { search } = useLocation();
+
   const handleSubmit = useCallback(
     async (data: ResetPasswordFormData) => {
       try {
@@ -40,6 +43,20 @@ const SignIn: React.FC = () => {
           abortEarly: false,
         });
 
+        const { password, password_confirmation } = data;
+
+        const [, token] = search.split('?token=');
+
+        if (!token) {
+          throw new Error();
+        }
+
+        await api.post('/password/reset', {
+          password,
+          password_confirmation,
+          token,
+        });
+
         history.push('/');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -51,13 +68,12 @@ const SignIn: React.FC = () => {
         }
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description:
-            'Suas credencias de login não coincidem com uma conta em nosso sistema',
+          title: 'Erro na recuperação de senha.',
+          description: 'Ocorreu um erro, tente novamente.',
         });
       }
     },
-    [addToast, history],
+    [addToast, history, search],
   );
   return (
     <Container>
