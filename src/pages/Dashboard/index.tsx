@@ -1,25 +1,32 @@
-import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
-
+import React from 'react';
+import { FiPower } from 'react-icons/fi';
 import { useAuth } from '../../hooks/auth';
 
+import imgLogo from '../../assets/logo.svg';
+
+import { Container, Header, HeaderContent, Profile } from './styles';
+
 const Dashboard: React.FC = () => {
-  const history = useHistory();
+  const { signOut, user } = useAuth();
 
-  const { signOut } = useAuth();
-
-  const handleSignOut = useCallback(() => {
-    signOut();
-
-    history.push('/');
-  }, [history, signOut]);
   return (
-    <>
-      <h1>Dashboard</h1>
-      <button onClick={handleSignOut} type="button">
-        Logout
-      </button>
-    </>
+    <Container>
+      <Header>
+        <HeaderContent>
+          <img src={imgLogo} alt="GoBarber" />
+          <Profile>
+            <img src={user.avatar_url} alt={user.name} />
+            <div>
+              <span>Bem vindo,</span>
+              <strong>{user.name}</strong>
+            </div>
+          </Profile>
+          <button type="button" onClick={signOut}>
+            <FiPower />
+          </button>
+        </HeaderContent>
+      </Header>
+    </Container>
   );
 };
 
