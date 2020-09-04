@@ -73,7 +73,7 @@ export const AvatarProfile = styled.div`
     border-radius: 50%;
   }
 
-  button {
+  label {
     position: absolute;
     width: 48px;
     height: 48px;
@@ -82,12 +82,17 @@ export const AvatarProfile = styled.div`
     background: #ff9000;
     bottom: 0;
     right: 0;
-
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 
     transition: background 0.2s;
+
+    input {
+      display: none;
+    }
+
     svg {
       color: #312e38;
       width: 20px;
