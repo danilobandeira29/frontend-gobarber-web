@@ -35,7 +35,7 @@ This is the frontend web of GoBarber, where a user can make appointments that wi
 - API REST/Restful
 - Typescript
 - Styled-components
-- Async Storage
+- React-Day-Picker
 - Unform
 - Yup
 - Axios
@@ -96,7 +96,7 @@ Frontend web do GoBarber, onde um usuário pode marcar compromissos que serão a
 - API REST/Restful
 - Typescript
 - Styled-components
-- Async Storage
+- React-Day-Picker
 - Unform
 - Yup
 - Axios
